@@ -1,18 +1,27 @@
 import config from '../config.json'
 import styled from 'styled-components'
+import { CSSReset } from '../src/components/CSSReset'
+import Menu from '../src/components/Menu'
+import { StyledTimeline } from '../src/components/TimeLine'
 
 
 const HomePage = () => {
-    const estiloDaHomePage = {backgroundColor: "red"}
+ 
 
 
 
     return(
         <>
-            <div style={estiloDaHomePage}>
-                <Menu/>
+            <CSSReset />
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                flex: 1,
+                // backgroundColor: "red",
+            }}>
+                <Menu />
                 <Header/>
-                <TimeLine />
+                <Timeline playlists={config.playlist} />
             </div>
         </>
     )
@@ -24,13 +33,13 @@ export default HomePage
 
 
 
-const Menu = () =>{
-    return (
-        <>
+// const Menu = () =>{
+//     return (
+//         <>
         
-        </>
-    )
-}
+//         </>
+//     )
+// }
 
 const StyledHeader = styled.div`
     img {
@@ -39,12 +48,13 @@ const StyledHeader = styled.div`
         border-radius: 50%;
     }
     .user-info {
+        margin-top: 50px;
         display: flex;
-        align-Items: center;
+        align-items: center;
         width: 100%;
         padding: 16px 32px;
+        gap: 16px;
     }
-
 `;
 
 const Header = () =>{
@@ -77,10 +87,38 @@ const Header = () =>{
 
 
 
-const TimeLine = () =>{
+const Timeline = (Props) =>{
+
+
+    const playlistNames = Object.keys(Props.playlists)
+
     return (
         <>
-        
+        <StyledTimeline>
+            {playlistNames.map((playlistName) => {
+                const videos = Props.playlists[playlistName];
+                console.log(playlistName);
+                console.log(videos);
+                return (
+                    <section>
+                        <h2>{playlistName}</h2>
+                        <div>
+                            {videos.map((video) => {
+                                return (
+                                    <a href={video.url}>
+                                        <img src={video.thumb} />
+                                        <span>
+                                            {video.title}
+                                        </span>
+                                    </a>
+                                )
+                            })}
+                        </div>
+                    </section>
+                )
+            })}
+        </StyledTimeline>
         </>
     )
 }
+
