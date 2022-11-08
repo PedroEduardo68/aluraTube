@@ -26,7 +26,7 @@
 
 <h2 align="center"> ### Exemple Page  </h2>
 <p align="center">
-  <img src="./project/imgExemple.png.png" width="500" title="Page Project">
+  <img src="./project/imgExemple.png" width="500" title="Page Project">
 </p>
 
 
