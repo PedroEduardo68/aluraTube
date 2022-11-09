@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { CSSReset } from '../src/components/CSSReset'
 import Menu from '../src/components/Menu'
 import { StyledTimeline } from '../src/components/TimeLine'
+import { useState } from 'react'
 
 
 const HomePage = () => {
  
-
+    const valorDoFiltro = useState("")
 
 
     return(
@@ -21,7 +22,7 @@ const HomePage = () => {
             }}>
                 <Menu />
                 <Header/>
-                <Timeline playlists={config.playlist} />
+                <Timeline searchValue={valorDoFiltro} playlists={config.playlist} />
             </div>
         </>
     )
@@ -87,7 +88,7 @@ const Header = () =>{
 
 
 
-const Timeline = (Props) =>{
+const Timeline = ({searchValue,...Props}) =>{
 
 
     const playlistNames = Object.keys(Props.playlists)
@@ -97,13 +98,15 @@ const Timeline = (Props) =>{
         <StyledTimeline>
             {playlistNames.map((playlistName) => {
                 const videos = Props.playlists[playlistName];
-                console.log(playlistName);
-                console.log(videos);
+                // console.log(playlistName);
+                // console.log(videos);
                 return (
                     <section>
                         <h2>{playlistName}</h2>
                         <div>
-                            {videos.map((video) => {
+                            {videos.filter((video) =>{
+                                return video.title.includes(searchValue)
+                            }).map((video) => {
                                 return (
                                     <a href={video.url}>
                                         <img src={video.thumb} />
