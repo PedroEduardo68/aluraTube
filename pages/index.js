@@ -49,7 +49,7 @@ const StyledHeader = styled.div`
         border-radius: 50%;
     }
     .user-info {
-        margin-top: 50px;
+
         display: flex;
         align-items: center;
         width: 100%;
@@ -58,26 +58,36 @@ const StyledHeader = styled.div`
     }
 `;
 
+
+const StyledBanner = styled.div`
+    background-color: blue;
+    height: 230px;
+    background-image: url('https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80')
+`
+
+
+
 const Header = () =>{
     return (
         <>
+        
             <StyledHeader>
+            <StyledBanner />
+                    <section className="user-info" >
+                            {/* <img src="banner" /> */}
+                        <img src={`https://github.com/${config.github}.png`} />
+                        <di>
+                            <h2>
+                                {config.name}
+                            </h2>
+                            <p>
+                                {config.job}
+                            </p>
+                        </di>
 
-                <section className="user-info" >
-                        {/* <img src="banner" /> */}
-                    <img src={`https://github.com/${config.github}.png`} />
-                    <di>
-                        <h2>
-                            {config.name}
-                        </h2>
-                        <p>
-                            {config.job}
-                        </p>
-                    </di>
 
-
-                </section>
-
+                    </section>
+                
             </StyledHeader>
 
         </>
@@ -95,34 +105,34 @@ const Timeline = ({searchValue,...Props}) =>{
 
     return (
         <>
-        <StyledTimeline>
-            {playlistNames.map((playlistName) => {
-                const videos = Props.playlists[playlistName];
-                // console.log(playlistName);
-                // console.log(videos);
-                return (
-                    <section>
-                        <h2>{playlistName}</h2>
-                        <div>
-                            {videos.filter((video) =>{
-                                const titleNormalized = video.title.toLowerCase();
-                                const searchNormalized = searchValue.toLowerCase();
-                                return titleNormalized.includes(searchNormalized)
-                            }).map((video) => {
-                                return (
-                                    <a href={video.url}>
-                                        <img src={video.thumb} />
-                                        <span>
-                                            {video.title}
-                                        </span>
-                                    </a>
-                                )
-                            })}
-                        </div>
-                    </section>
-                )
-            })}
-        </StyledTimeline>
+            <StyledTimeline>
+                {playlistNames.map((playlistName) => {
+                    const videos = Props.playlists[playlistName];
+                    // console.log(playlistName);
+                    // console.log(videos);
+                    return (
+                        <section key={playlistName}>
+                            <h2>{playlistName}</h2>
+                            <div>
+                                {videos.filter((video) =>{
+                                    const titleNormalized = video.title.toLowerCase();
+                                    const searchNormalized = searchValue.toLowerCase();
+                                    return titleNormalized.includes(searchNormalized)
+                                }).map((video) => {
+                                    return (
+                                        <a key={video.url} href={video.url}>
+                                            <img src={video.thumb} />
+                                            <span>
+                                                {video.title}
+                                            </span>
+                                        </a>
+                                    )
+                                })}
+                            </div>
+                        </section>
+                    )
+                })}
+            </StyledTimeline>
         </>
     )
 }
