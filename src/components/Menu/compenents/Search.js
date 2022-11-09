@@ -34,11 +34,6 @@ const StyledSearch = styled.div`
   }
 `;
 
-// Home 
-// Menu
-// Search
-// Informação sempre desce
-
 
 const  Search = ({ valorDoFiltro, setValorDoFiltro }) => {
     // const [valorDaBusca, setValorDaBusca] = useState("Teste");

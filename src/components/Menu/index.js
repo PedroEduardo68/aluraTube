@@ -27,13 +27,13 @@ const StyledMenu = styled.header`
 
 
 
-const Menu = () =>{
+const Menu = ({setValorDoFiltro,valorDoFiltro}) =>{
   return (
     <StyledMenu>
       <div>
         <Logo />
       </div>
-      <Search />
+      <Search  setValorDoFiltro={setValorDoFiltro} valorDoFiltro={valorDoFiltro}/>
     </StyledMenu>
   );
 }

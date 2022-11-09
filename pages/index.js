@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 const HomePage = () => {
  
-    const valorDoFiltro = useState("")
+    const [valorDoFiltro, setValorDoFiltro] = useState("")
 
 
     return(
@@ -20,8 +20,8 @@ const HomePage = () => {
                 flex: 1,
                 // backgroundColor: "red",
             }}>
-                <Menu />
-                <Header/>
+                <Menu setValorDoFiltro={setValorDoFiltro} valorDoFiltro={valorDoFiltro}/>
+                <Header  />
                 <Timeline searchValue={valorDoFiltro} playlists={config.playlist} />
             </div>
         </>
@@ -105,7 +105,9 @@ const Timeline = ({searchValue,...Props}) =>{
                         <h2>{playlistName}</h2>
                         <div>
                             {videos.filter((video) =>{
-                                return video.title.includes(searchValue)
+                                const titleNormalized = video.title.toLowerCase();
+                                const searchNormalized = searchValue.toLowerCase();
+                                return titleNormalized.includes(searchNormalized)
                             }).map((video) => {
                                 return (
                                     <a href={video.url}>
