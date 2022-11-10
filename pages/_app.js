@@ -1,5 +1,31 @@
+import { useContext } from "react"
 import { ThemeProvider } from "styled-components"
 import { CSSReset } from "../src/components/CSSReset"
+import ColorModeProvider, {ColorModeContext} from "../src/components/Menu/compenents/ColorModeProvider"
+
+
+
+
+
+/**
+ * The ProviderWrapper function takes in a child component and returns a ColorModeProvider component
+ * that wraps the child component.
+ * @param props - The props that are passed to the component.
+ * @returns A function that returns a component
+ */
+// _app.js -> Definições globais do NextJS
+// ThemeProvider -> Prover o tema para a app toda
+// ColorModeProvider -> Prove o state de light ou dark mode para todo mundo 
+
+const ProviderWrapper = (props) =>{
+    return (
+        <ColorModeProvider initialMode={"dark"}>
+            {props.children}
+        </ColorModeProvider>
+    )
+}
+
+
 
 // _app.js
 const MyApp = ({ Component, pageProps }) => {
@@ -21,16 +47,37 @@ const MyApp = ({ Component, pageProps }) => {
     
     }
 
+
+
+
     
+    const context = useContext(ColorModeContext)
+
+
+
+
+
     return (
         <>
-            <ThemeProvider theme={themeActive.dark}>
-                <CSSReset />
-                <Component {...pageProps}/>
-            </ThemeProvider>
+                <ThemeProvider theme={themeActive[context.mode]}>
+                    <CSSReset />
+                    <Component {...pageProps}/>
+                </ThemeProvider>
         </>
 
     )
+
+
 }
-export default MyApp
+
+
+
+const _App = (Props) =>{
+    return(
+        <ProviderWrapper>
+            <MyApp {...Props}/>
+        </ProviderWrapper>
+    )
+}
   
+export default _App;
