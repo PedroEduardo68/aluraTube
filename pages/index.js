@@ -4,14 +4,10 @@ import { CSSReset } from '../src/components/CSSReset'
 import Menu from '../src/components/Menu'
 import { StyledTimeline } from '../src/components/TimeLine'
 import { useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
-import { videoService } from "../src/services/videoService";
-import { useEffect } from 'react/'
+import { useEffect } from 'react'
+import { videoService } from '../src/components/services/videoService'
 
 
-const supabaseUrl = 'https://guroxesxctmenafhhudh.supabase.co'
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1cm94ZXN4Y3RtZW5hZmhodWRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjgzOTM2NjgsImV4cCI6MTk4Mzk2OTY2OH0.SjPLtP75hOeRnZtXCeaZ9MJrMQX-QowuGMAvu003nWs'
-const supabase = createClient(supabaseUrl, supabaseKey)
 
 
 
@@ -23,13 +19,10 @@ const HomePage = () => {
 
  
 
-    useEffectt(() => {
-        console.log("useEffect");
+    useEffect(() => {
         service
             .getAllVideos()
             .then((dados) => {
-                console.log(dados.data);
-                // Forma imutavel
                 const novasPlaylists = {};
                 dados.data.forEach((video) => {
                     if (!novasPlaylists[video.playlist]) novasPlaylists[video.playlist] = [];
