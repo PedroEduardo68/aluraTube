@@ -14,7 +14,7 @@ import { videoService } from '../src/components/services/videoService'
 const HomePage = () => {
     const service = videoService();
     const [valorDoFiltro, setValorDoFiltro] = useState("")
-    const [playlists, setPlaylists] = React.useState({}); 
+    const [playlists, setPlaylists] = useState({}); 
 
 
  
