@@ -50,7 +50,7 @@ const RegisterVideo = () =>{
                 </button>
                 {formVisivel && 
                             <form onSubmit={(event) =>{
-                                event.prventDefault();
+                                event.preventDefault();
                                 setFormVisivel(false)
                                 supabase.from("video").insert({
                                     title:formCadastro.values.titulo,
@@ -58,10 +58,10 @@ const RegisterVideo = () =>{
                                     thumb: getThumbnail(formCadastro.values.url),
                                     playlist:"jogos",
                                 }).then((resp)=>{
-                                    console.log(resp);
+                                    alert("Cadastro com sucesso!!")
                                 })
                                 .catch((err) => {
-                                   console.log(err);
+                                    alert("Erro ao Cadastro!!")
                                 })
                                 formCadastro.clearform()
                             }}>
